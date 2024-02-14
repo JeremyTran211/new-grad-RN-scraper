@@ -7,8 +7,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.firefox.options import Options
 
-
-
 def governmentjobs_listing(url):
     
     try:
@@ -24,9 +22,7 @@ def governmentjobs_listing(url):
         job_listings = []
         
         try: 
-            
             while True:
-                
                 container_xpath = '//*[@id="job-list-container"]/ul'
                 containers = WebDriverWait(driver, 10).until(
                  EC.presence_of_all_elements_located((By.XPATH, container_xpath)))
