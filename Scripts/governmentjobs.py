@@ -70,14 +70,16 @@ def governmentjobs_listing(url):
         print(f"Error at opening window: ", e)
         
     df = pd.DataFrame(job_listings)
-    print(df)
     driver.quit()
+    
+    return df
     
 def governmentjobs_runner():
     try:
         url = "https://www.governmentjobs.com/careers/santaclara"
-        governmentjobs_listing(url)
+        gov_jobs = governmentjobs_listing(url)
 
     except Exception as e:
         print(f"Error at insert: ", e)
     
+    return gov_jobs
