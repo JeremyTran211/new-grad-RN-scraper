@@ -1,10 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <Title>New Grad RN Job Listings</Title>
+    <title>New Grad RN Job Listings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%; /* Full width table */
+        }
+
+        th, td {
+            padding: 8px; /* Padding for cells */
+            text-align: left; /* Align text to the left */
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: black;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9; /* Zebra striping for rows */
+        }
+
+        tr:hover {
+            background-color: #ddd; /* Row hover effect */
+        }
+
+        /* Hide borders */
+        th, td, table {
+            border: none;
+        }
+        /* Remove hover effect*/
+        /*tr:hover {
+            background-color: #ddd;
+        }*/
+    </style>
 </head>
 <body>
-    <h1>CSV Data</h1>
-    {{data_html|safe}}
+    <h1>CSV Data </h1>
+    {{ data_html|safe }}
 </body>
 </html>

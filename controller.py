@@ -3,7 +3,7 @@ import pandas as pd
 from Scripts.hcahealthcare import hcahealthcare_runner
 from Scripts.governmentjobs import governmentjobs_runner  
 
-# Filter results of scraping
+#------------------- Scraper Runners ---------------------#
 def filter_df(df):
     try:
         data = pd.DataFrame(df)
@@ -38,7 +38,7 @@ def run_gov(listings_dict):
    except Exception as e:
       print(f"An error occurred: {e}")
 
-#------------------- PROGRAM START---------------------#
+#------------------- PROGRAM START ---------------------#
 
 # To handle all the df from threads
 RN_listings = {}
