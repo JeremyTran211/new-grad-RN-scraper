@@ -53,4 +53,4 @@ thread_hca.join()
 thread_gov.join()
 
 combined_df = pd.concat([RN_listings.get('HCA', pd.DataFrame()), RN_listings.get('GOV', pd.DataFrame())], ignore_index=True)
-combined_df.to_csv('New_Grad_Listings.csv',index = False)
+combined_df.to_csv('../New_Grad_Listings.csv', index = False)

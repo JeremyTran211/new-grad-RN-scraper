@@ -1,4 +1,10 @@
 {
     "appService.defaultWebAppToDeploy": "/subscriptions/5916e958-9bd9-480d-baa2-0d6d2c50118d/resourceGroups/NewGradRnMonitor_group-bd98/providers/Microsoft.Web/sites/NewGradRnMonitor",
-    "appService.deploySubpath": "."
+    "appService.deploySubpath": "NewGradRNScraper",
+    "azureFunctions.deploySubpath": "NewGradRNScraper",
+    "azureFunctions.scmDoBuildDuringDeployment": true,
+    "azureFunctions.pythonVenv": ".venv",
+    "azureFunctions.projectLanguage": "Python",
+    "azureFunctions.projectRuntime": "~4",
+    "debug.internalConsoleOptions": "neverOpen"
 }
