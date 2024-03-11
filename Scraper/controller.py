@@ -2,6 +2,7 @@ import threading
 import pandas as pd
 from Scripts.hcahealthcare import hcahealthcare_runner
 from Scripts.governmentjobs import governmentjobs_runner  
+from Scripts.oraclecloud import oraclecloud_runner
 
 #------------------- Scraper Runners ---------------------#
 def filter_df(df):
@@ -25,8 +26,10 @@ def run_hca(listings_dict):
       filtered_hca = filter_df(hca)
       # Add to combined dictionary with key 'HCA'
       listings_dict['HCA'] = filtered_hca
+      
    except Exception as e:
-      print(f"An error occurred: {e}")
+      print(f"An error occurred at HCA: {e}")
+      
    return filtered_hca
 
 # governmentjobs
@@ -35,9 +38,19 @@ def run_gov(listings_dict):
       gov = governmentjobs_runner()
       filtered_gov = filter_df(gov)
       listings_dict['GOV'] = filtered_gov
+      
    except Exception as e:
-      print(f"An error occurred: {e}")
-
+      print(f"An error occurred at GovernmentJobs: {e}")
+      
+# oraclecloud
+def run_oracle(listings_dict):
+   try:
+      oc = oraclecloud_runner()
+      filtered_oc = filter_df(oc)
+      listings_dict['OC'] = filtered_oc
+   
+   except Exception as e:
+      print(f"An error occured at OracleCloud: {e}")
 #------------------- PROGRAM START ---------------------#
 
 # To handle all the df from threads
@@ -45,12 +58,15 @@ RN_listings = {}
 
 thread_hca = threading.Thread(target=run_hca, args=(RN_listings,))
 thread_gov = threading.Thread(target=run_gov, args=(RN_listings,))
+thread_oc = threading.Thread(target=run_oracle, args=(RN_listings,))
 
 thread_hca.start()
 thread_gov.start()
+thread_oc.start()
 
 thread_hca.join()
 thread_gov.join()
+thread_oc.join()
 
-combined_df = pd.concat([RN_listings.get('HCA', pd.DataFrame()), RN_listings.get('GOV', pd.DataFrame())], ignore_index=True)
+combined_df = pd.concat([RN_listings.get('HCA', pd.DataFrame()), RN_listings.get('GOV', pd.DataFrame()),  RN_listings.get('OC', pd.DataFrame())], ignore_index=True)
 combined_df.to_csv('../New_Grad_Listings.csv', index = False)

@@ -121,6 +121,3 @@ def oraclecloud_runner():
         print(f"Error at start: ", e)
     
     return oraclecloud_jobs
-
-if __name__ == "__main__":
-    oraclecloud_runner()
