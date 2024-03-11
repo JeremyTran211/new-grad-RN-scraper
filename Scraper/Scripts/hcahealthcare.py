@@ -40,7 +40,7 @@ def hcahealthcare_listing(url):
         contianer_xpath = '//*[@id="job-list-inner"]/div[2]/div[5]/div'
         containers = driver.find_elements(By.XPATH, contianer_xpath)
 
-        # Access the container for listings
+        # Access the container to get # of listings
         inner_elements = containers[0].find_elements(By.XPATH, "./*")
 
         for inner_index in range(len(inner_elements) - 1):
@@ -51,8 +51,12 @@ def hcahealthcare_listing(url):
             hospital_links = driver.find_element(By.XPATH, hospital_xpath)
             
             # Set up key-value dictionary
-            job_details ={"Job": job_links.text, "Link": job_links.get_attribute('href'),
-                        "Hospital": hospital_links.text}
+            job_details = { 
+                          "Job": job_links.text, 
+                          "Link": job_links.get_attribute('href'),
+                          "Hospital": hospital_links.text
+                        }
+            
             # Adds job details into a single list
             job_listings.append(job_details)
         
