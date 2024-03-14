@@ -51,6 +51,7 @@ def run_oracle(listings_dict):
    
    except Exception as e:
       print(f"An error occured at OracleCloud: {e}")
+      
 #------------------- PROGRAM START ---------------------#
 
 # To handle all the df from threads

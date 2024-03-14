@@ -39,7 +39,7 @@ def hcahealthcare_listing(url):
         # Xpath to container that encloses all the job listings to get number of listings
         contianer_xpath = '//*[@id="job-list-inner"]/div[2]/div[5]/div'
         containers = driver.find_elements(By.XPATH, contianer_xpath)
-
+        
         # Access the container to get # of listings
         inner_elements = containers[0].find_elements(By.XPATH, "./*")
 

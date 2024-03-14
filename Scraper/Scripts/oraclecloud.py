@@ -18,12 +18,12 @@ from selenium.webdriver.firefox.options import Options
 def oraclecloud_listing(url):
     i = 0
     # Open site with interface
-    driver = webdriver.Firefox()
+    # driver = webdriver.Firefox()
     
     # Open site wth headless option
-    # fox_options = Options()
-    # fox_options.add_argument("-headless")
-    # driver = webdriver.Firefox(options=fox_options)
+    fox_options = Options()
+    fox_options.add_argument("-headless")
+    driver = webdriver.Firefox(options=fox_options)
     driver.get(url)
     WebDriverWait(driver, 20).until(lambda d: d.execute_script('return document.readyState') == 'complete')
 
@@ -93,7 +93,7 @@ def oraclecloud_listing(url):
             location_xpath = f'/html/body/div[3]/div[1]/div/div[1]/main/div/div/div/div/div/div[3]/div/div/div/div/div/div/ul/li[{i + 1}]/div/a/div[1]/search-result-item-header/div/div/span[1]/span'
             location_box = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, location_xpath)))
             job_details["Location"] = location_box.text
-            print(i)
+
         except TimeoutException:
             print(f"Location not found for item {i+1}")
                 
@@ -101,9 +101,6 @@ def oraclecloud_listing(url):
             job_listings.append(job_details)
             
         i += 1
-        
-    print(*job_listings, sep="\n", end="\n\n")
-    print(len(job_listings))
     
     return job_listings
  
