@@ -26,7 +26,7 @@ def hcahealthcare_listing(url):
             EC.element_to_be_clickable((By.XPATH, reject_button_xpath))
         )
         reject_button.click()
-        print("Rejected cookies")
+       
         
     except TimeoutException:
         print("No cookie banner found or button not clickable.")
@@ -39,7 +39,7 @@ def hcahealthcare_listing(url):
         # Xpath to container that encloses all the job listings to get number of listings
         contianer_xpath = '//*[@id="job-list-inner"]/div[2]/div[5]/div'
         containers = driver.find_elements(By.XPATH, contianer_xpath)
-        
+
         # Access the container to get # of listings
         inner_elements = containers[0].find_elements(By.XPATH, "./*")
 
@@ -67,10 +67,10 @@ def hcahealthcare_listing(url):
             next_xpath = '//*[@id="job-list-inner"]/div[2]/div[5]/div/div[26]/div[1]/div/nav/ul/li[4]/a/i'
             next_button = driver.find_element(By.XPATH, next_xpath)
             next_button.click()
-            print("Clicked") 
+            
             
         except NoSuchElementException:
-            print("Reached the end of listings")
+            #print("Reached the end of listings")
             break
         
         except Exception as e:

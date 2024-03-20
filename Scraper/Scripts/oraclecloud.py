@@ -38,9 +38,7 @@ def oraclecloud_listing(url):
         numbers = re.findall(r'\d+', total_text)
         number = int(numbers[0])
         total = number
-        print(total)
         
-    
     except Exception as e:
         print(f"Error at total: ", e)
 
@@ -58,16 +56,6 @@ def oraclecloud_listing(url):
         if new_height == last_height:
             break  # If heights are the same, it means we've reached the bottom
         last_height = new_height
-
-        # Test for retrieving job info due to constant change on site      
-        # try:
-        #     job_titles_xpath = '/html/body/div[3]/div[1]/div/div[1]/main/div/div/div/div/div/div[3]/div/div/div/div/div/div/ul/li[1]/div/a/div[1]/search-result-item-header/div/span'
-        #     job_titles = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, job_titles_xpath)))
-        #     job_title = job_titles.text
-        #     print(job_title)
-            
-        # except Exception as e:
-        #     print(f"Error retrieving title: ", e)
         
     while total != len(job_listings):
         job_details = {}
