@@ -38,7 +38,7 @@ def governmentjobs_listing(url):
                     job_details ={
                                   "Job": job_links.text, 
                                   "Link": job_links.get_attribute('href'),
-                                  "Hospital": hospital_links.text
+                                  "Location": hospital_links.text
                     }
                     # Adds job details into a single list
                     job_listings.append(job_details)

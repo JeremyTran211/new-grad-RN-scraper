@@ -63,6 +63,8 @@ def oraclecloud_listing(url):
             i += 1
             continue
         
+        job_details["Hospital"] = "St. Helena"
+        
         try:                    
             job_title_xpath = f'/html/body/div[3]/div[1]/div/div[1]/main/div/div/div/div/div/div[3]/div/div/div/div/div/div/ul/li[{i + 1}]/div/a/div[1]/search-result-item-header/div/span'
             job_title_box = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, job_title_xpath)))
@@ -95,9 +97,7 @@ def oraclecloud_listing(url):
 def oraclecloud_runner():
     try:
         url = (
-                "https://ecvz.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/requisitions?"
-                "lastSelectedFacet=ORGANIZATIONS&location=Napa%2C+CA%2C+United+States&locationId=300000002565489&"
-                "locationLevel=city&mode=job-location&radius=25&radiusUnit=MI&selectedOrganizationsFacet=300000009236588"
+                "https://ecvz.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/requisitions?lastSelectedFacet=ORGANIZATIONS&location=Napa%2C+CA%2C+United+States&locationId=300000002565489&locationLevel=city&mode=job-location&radius=25&radiusUnit=MI&selectedOrganizationsFacet=300000009236588"
         )
 
         oraclecloud_jobs = oraclecloud_listing(url)
@@ -106,3 +106,6 @@ def oraclecloud_runner():
         print(f"Error at start: ", e)
     
     return oraclecloud_jobs
+
+if __name__ == '__main__':
+    oraclecloud_runner()

@@ -12,7 +12,7 @@ def filter_df(df):
         filtered_df = data[data["Job"].str.contains(r"New Graduate Nurse Residency|Clinical Nurse I\b|Clinical Nurse 1|New Grad RN Residency|"
                                                     r"New Grad Nurse Residency Program|Nurse 1|Staff Nurse I\b|Registered Nurse I\b|Staff Nurse 1|"
                                                     r"New Grad|New Grad Registered Nurse|RN New Grad Residency Program|Nurse Residency Program|"
-                                                    r"New Grad RN|RN 1|RN I\b|Manager|OR Staff RN II - Operating Room - Full Time 8 hr - Nights Variable\b", case=False, na=False)]
+                                                    r"New Grad RN|RN 1|RN I\b|Manager|OR Staff RN II - Operating Room - Full Time 8 hr - Nights Variable\b|RN\b", case=False, na=False)]
         return filtered_df
     except Exception as e:
         print(f"Error occurred while filtering: {e}")
