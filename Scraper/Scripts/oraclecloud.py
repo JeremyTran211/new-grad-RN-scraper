@@ -54,7 +54,7 @@ def oraclecloud_listing(url):
         # Calculate the new scroll height and compare it with the last scroll height
         new_height = driver.execute_script("return document.body.scrollHeight")
         if new_height == last_height:
-            break  # If heights are the same, it means we've reached the bottom
+            break  
         last_height = new_height
         
     while total != len(job_listings):

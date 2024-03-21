@@ -60,13 +60,12 @@ def hcahealthcare_listing(url):
             # Adds job details into a single list
             job_listings.append(job_details)
         
-        time.sleep(3) 
-        
         try:
             #Click next button 
             next_xpath = '//*[@id="job-list-inner"]/div[2]/div[5]/div/div[26]/div[1]/div/nav/ul/li[4]/a/i'
             next_button = driver.find_element(By.XPATH, next_xpath)
             next_button.click()
+            time.sleep(1)
             
             
         except NoSuchElementException:
