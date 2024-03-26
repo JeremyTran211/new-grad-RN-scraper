@@ -45,13 +45,10 @@ def oraclecloud_listing(url):
     last_height = driver.execute_script("return document.body.scrollHeight")
 
     while True:
-        # Scroll down to the bottom of the page
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
-        # Wait for the new content to load
         time.sleep(random.uniform(3, 6))
 
-        # Calculate the new scroll height and compare it with the last scroll height
         new_height = driver.execute_script("return document.body.scrollHeight")
         if new_height == last_height:
             break  
