@@ -92,14 +92,12 @@ def spirit_listing(url):
         numbers = re.findall(r'\d+', total_text)
         number = int(numbers[0])
         total = number
-        print("THIS IS THE TOTAL", total)
         
     except Exception as e:
         print(f"Error at total: ", e)
     
     # Get listings 
     while total > len(job_listings):
-        print("CURRENT:", total, "     LISTINGS:", len(job_listings))
         contianer_xpath = '//*[@id="search-results-list"]/ul'
         containers = driver.find_element(By.XPATH, contianer_xpath)
         inner_elements = containers.find_elements(By.XPATH, "./*")
@@ -107,16 +105,19 @@ def spirit_listing(url):
         for i in range(len(inner_elements)):
             title_xpath = f'//*[@id="search-results-list"]/ul/li[{i + 1}]/a[1]/div/h2'
             link_xpath = f'//*[@id="search-results-list"]/ul/li[{i + 1}]/a[1]'
-            location_xpath = f''
-            hospital_xpath = f''
+            location_xpath = f'//*[@id="search-results-list"]/ul/li[{i + 1}]/a[1]/div/span[3]'
+            hospital_xpath = f'//*[@id="search-results-list"]/ul/li[{i + 1}]/a[1]/div/span[2]'
             
             title_links = driver.find_element(By.XPATH, title_xpath)
             link_links = driver.find_element(By.XPATH, link_xpath)
+            location_links = driver.find_element(By.XPATH, location_xpath)
+            hospital_links = driver.find_element(By.XPATH, hospital_xpath)
             
             job_details = { 
                             "Job": title_links.text,
                             "Link": link_links.get_attribute('href'),
-                            
+                            "Location": location_links.text,
+                            "Hospital": hospital_links.text
                             }
                 
             job_listings.append(job_details)
@@ -136,6 +137,7 @@ def spirit_listing(url):
             print("Error going to next page: ", e)
         
     df = pd.DataFrame(job_listings)
+    print(len(df))
     return df
     
 def spirit_runner():
