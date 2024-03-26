@@ -64,7 +64,7 @@ def spirit_listing(url):
                 time.sleep(1)
                 
         except Exception as e:
-            print(f"Error closing Arizona: {e}")
+            print(f"Error closing pre-existing filters: {e}")
     
     city_list_xpath = '//*[@id="city-toggle"]'
     city_list_button = WebDriverWait(driver, 30).until(
@@ -114,7 +114,7 @@ def spirit_listing(url):
             link_links = driver.find_element(By.XPATH, link_xpath)
             
             job_details = { 
-                            "Title": title_links.text,
+                            "Job": title_links.text,
                             "Link": link_links.get_attribute('href'),
                             
                             }
@@ -136,18 +136,18 @@ def spirit_listing(url):
             print("Error going to next page: ", e)
         
     df = pd.DataFrame(job_listings)
-    df.to_csv('spiritdata')
-    print(len(df))
+    return df
     
 def spirit_runner():
     url = "https://www.commonspirit.careers/search-jobs?orgIds=35300&acm=ALL&alrpm=6252001-5551752,6252001-5417618,6252001-5509151,6252001-5332921,6252001-4896861&ascf=[%7B%22key%22:%22industry%22,%22value%22:%22Dignity+Health%22%7D,%7B%22key%22:%22industry%22,%22value%22:%22CommonSpirit%22%7D]"
     
     try: 
-        spirit_listing(url)
+        spirit_jobs = spirit_listing(url)
         
     except Exception as e:
         print(f"Fail to get listing from CommonSpirit: {e}")
-
+    
+    return spirit_jobs
 
 if __name__ == "__main__":
     spirit_runner()

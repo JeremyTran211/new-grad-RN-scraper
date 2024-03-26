@@ -5,6 +5,7 @@ from Scripts.governmentjobs import governmentjobs_runner
 from Scripts.oraclecloud import oraclecloud_runner
 from Scripts.workday import workday_runner
 from Scripts.whhs import whhs_runner
+from Scripts.commonspirit import spirit_runner
 
 def filter_df(df):
     try:
@@ -14,9 +15,10 @@ def filter_df(df):
                                                     r"New Grad|New Grad Registered Nurse|RN New Grad Residency Program|Nurse Residency Program|"
                                                     r"New Grad RN|RN 1|RN I\b|Manager|OR Staff RN II - Operating Room - Full Time 8 hr - Nights Variable\b|RN\b", case=False, na=False)]
         return filtered_df
+     
     except Exception as e:
         print(f"Error occurred while filtering: {e}")
-        return df  # Return the original DataFrame in case of an error
+        return df 
 
 def run_hca(listings_dict):
    try:
@@ -67,6 +69,15 @@ def run_whhs(listings_dict):
    
    except Exception as e:
       print(f"An error occued at WHHS: {e}")
+
+def run_spirit(listings_dict):
+   try:
+      cs = spirit_runner()
+      filtered_cs = filter_df(cs)
+      listings_dict['CS'] = filtered_cs
+   
+   except Exception as e:
+      print(f"An error occued at Commonspirit: {e}")
       
 #------------------- PROGRAM START ---------------------#
 
@@ -78,24 +89,28 @@ thread_gov = threading.Thread(target=run_gov, args=(RN_listings,))
 thread_oc = threading.Thread(target=run_oracle, args=(RN_listings,))
 thread_wd = threading.Thread(target=run_workday, args=(RN_listings,))
 thread_whhs = threading.Thread(target=run_whhs, args=(RN_listings,))
+thread_cs = threading.Thread(target=run_spirit, args=(RN_listings,))
 
 thread_hca.start()
 thread_gov.start()
 thread_oc.start()
 thread_wd.start()
 thread_whhs.start()
+thread_cs.start()
 
 thread_hca.join()
 thread_gov.join()
 thread_oc.join()
 thread_wd.join()
 thread_whhs.join()
+thread_cs.join()
 
 combined_df = pd.concat([
                            RN_listings.get('HCA', pd.DataFrame()), 
                            RN_listings.get('GOV', pd.DataFrame()),  
                            RN_listings.get('OC', pd.DataFrame()),
                            RN_listings.get('WD', pd.DataFrame()),
-                           RN_listings.get('WHHS', pd.DataFrame())
+                           RN_listings.get('WHHS', pd.DataFrame()),
+                           RN_listings.get('CS', pd.DataFrame())
                         ], ignore_index=True)
 combined_df.to_csv('../New_Grad_Listings.csv', index = False)
