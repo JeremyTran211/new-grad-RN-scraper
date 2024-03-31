@@ -88,7 +88,8 @@ def oraclecloud_listing(url):
             job_listings.append(job_details)
             
         i += 1
-    
+        
+    driver.quit()
     return job_listings
  
 def oraclecloud_runner():

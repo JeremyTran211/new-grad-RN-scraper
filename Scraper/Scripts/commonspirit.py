@@ -73,8 +73,8 @@ def spirit_listing(url):
     city_list_button.click()
     time.sleep(2)
     
-    #Apply new filter
-    filter_numbers = [30, 33, 24, 4]
+    #Apply new filter 
+    filter_numbers = [31, 34, 25, 4]
     for i in filter_numbers:
         new_filter_xpath = f'//*[@id="city-filter-{i}"]'
         
@@ -135,7 +135,8 @@ def spirit_listing(url):
         
         except Exception as e:
             print("Error going to next page: ", e)
-        
+            
+    driver.quit()
     df = pd.DataFrame(job_listings)
     print(len(df))
     return df

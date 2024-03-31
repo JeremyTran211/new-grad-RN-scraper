@@ -47,7 +47,7 @@ def governmentjobs_listing(url):
                     
             try:
                 #Click next button 
-                next_xpath = '//*[@id="job-list-container"]/div[3]/div[1]/div[1]/ul/li[9]/a'
+                next_xpath = '//*[@id="job-list-container"]/div[3]/div[1]/div[1]/ul/li[8]/a'
                 next_button = driver.find_element(By.XPATH, next_xpath)
                 next_href = next_button.get_attribute('href')
                 

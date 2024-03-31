@@ -76,7 +76,8 @@ def workday_listing(url):
             
         except Exception as e: 
             print(f"Error retreiving listing: {e}") 
-           
+            
+    driver.quit()      
     df = pd.DataFrame(job_listings)
     return df
     

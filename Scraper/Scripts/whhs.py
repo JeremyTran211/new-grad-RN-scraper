@@ -39,7 +39,8 @@ def whhs_listings(url):
             
     except Exception as e:
         print(f"Error getting the listings from container: {e}")
-
+        
+    driver.quit()
     df = pd.DataFrame(job_listings)
     return df
 
