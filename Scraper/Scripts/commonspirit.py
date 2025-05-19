@@ -1,33 +1,39 @@
 import time
 import re
 import pandas as pd
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.common.action_chains import ActionChains
+from selenium import webdriver      # Core driver of selenium
+from selenium.webdriver.common.by import By     # Helps locate elements by ID, class,..
+from selenium.common.exceptions import TimeoutException, NoSuchElementException     # Look for element on page
+from selenium.webdriver.support.ui import WebDriverWait     # Wait on Webpage for elements to be present
+from selenium.webdriver.support import expected_conditions as EC      # Wait until specific condition is true
+from selenium.webdriver.firefox.options import Options      # Activate options on Firefox
+from selenium.webdriver.common.action_chains import ActionChains    # Chain multiple actions on a page
 
 def spirit_listing(url):
+    # Start the driver for Firefox
     driver = webdriver.Firefox()
     driver.get(url)
     
+    # Job listing l
     job_listings = []
 
+    # Attempting to clear the cookies permission pop-up if present
     try:
+        # Waiting 20sec until element is clickable in attempt to clear cookies pop-up by rejecting it
         reject_button_xpath = '/html/body/div[4]/button'
         reject_button = WebDriverWait(driver, 20).until(
             EC.element_to_be_clickable((By.XPATH, reject_button_xpath))
         )
         reject_button.click()
     
+    # If the pop-up appears and if we failed to close the pop-up
     except NoSuchElementException:
         print("No such button for cookies")
         
     except Exception as e:
         print(f"Failed to close cookie banner: {e}")
     
+    # Same thing but for a different pop-up, *** Add reason ***
     try:
         reject_button_xpath = '//*[@id="igdpr-button"]'
         reject_button = WebDriverWait(driver, 20).until(
